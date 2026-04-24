@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bersihbersih – Jasa Kebersihan Profesional</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue: #0400f7;
+      --teal-light: #12c4b4;
+      --teal-dark: #07716a;
+      --sky: #e6faf8;
+      --white: #ffffff;
+      --charcoal: #1a2c2b;
+      --gray: #5a7170;
+      --light: #f0fbf9;
+      --accent: #f4c430;
+      --radius: 18px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(10,155,142,0.12);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 68px;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 900;
+      color: var(--blue);
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--blue); }
+
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 0.93rem; font-weight: 500;
+      color: var(--charcoal); transition: color .2s;
+      position: relative; padding-bottom: 2px;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+      background: var(--teal); transition: width .25s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-socials { display: flex; gap: 0.7rem; align-items: center; }
+    .nav-socials a {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--light); display: flex; align-items: center; justify-content: center;
+      color: var(--teal-dark); text-decoration: none; transition: background .2s, color .2s;
+    }
+    .nav-socials a:hover { background: var(--teal); color: #fff; }
+    .nav-socials svg { width: 16px; height: 16px; }
+
+    /* hamburger */
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .burger span { display: block; width: 24px; height: 2px; background: var(--charcoal); border-radius: 2px; transition: all .3s; }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 8vw 80px; }
+    section:first-of-type { padding-top: 140px; }
+
+    /* ── HERO / HOME ── */
+    #home {
+      background: linear-gradient(135deg, #e6faf8 0%, #c5f3ed 50%, #e0f7f4 100%);
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg-circle {
+      position: absolute; border-radius: 50%; opacity: 0.12;
+      background: var(--teal);
+    }
+    .hero-bg-circle.c1 { width: 500px; height: 500px; right: -100px; top: -100px; }
+    .hero-bg-circle.c2 { width: 300px; height: 300px; left: -60px; bottom: -60px; }
+    .hero-bg-circle.c3 { width: 180px; height: 180px; right: 30%; top: 60%; opacity: 0.07; }
+
+    .hero-inner {
+      position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(10,155,142,0.12); color: var(--teal-dark);
+      border-radius: 50px; padding: 6px 16px; font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.5px; margin-bottom: 1.2rem;
+    }
+    .hero-badge::before { content: '✦'; font-size: 0.7rem; }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 900; line-height: 1.12;
+      color: var(--charcoal);
+    }
+    h1 em { color: var(--teal); font-style: normal; }
+    .hero-desc {
+      margin: 1.4rem 0 2.2rem; font-size: 1.05rem; color: var(--gray);
+      line-height: 1.72; max-width: 480px;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--teal); color: #fff;
+      padding: 15px 30px; border-radius: 50px;
+      font-size: 0.97rem; font-weight: 600; text-decoration: none;
+      box-shadow: 0 8px 24px rgba(10,155,142,0.35);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(10,155,142,0.42); }
+    .btn-primary svg { width: 18px; height: 18px; }
+
+    .hero-stats {
+      display: flex; gap: 2rem; margin-top: 2.5rem;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.72); backdrop-filter: blur(8px);
+      border-radius: 14px; padding: 14px 22px; border: 1px solid rgba(10,155,142,0.15);
+    }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--teal-dark); }
+    .stat-lbl { font-size: 0.78rem; color: var(--gray); font-weight: 500; }
+
+    .hero-visual {
+      display: flex; align-items: center; justify-content: center; position: relative;
+    }
+    .hero-icon-ring {
+      width: 340px; height: 340px; border-radius: 50%;
+      border: 2px dashed rgba(10,155,142,0.25);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; animation: spin 24s linear infinite;
+    }
+    .hero-icon-ring-inner {
+      width: 260px; height: 260px; border-radius: 50%;
+      background: linear-gradient(145deg, var(--teal), var(--teal-dark));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 7rem; box-shadow: 0 24px 60px rgba(10,155,142,0.4);
+      animation: spin 24s linear infinite reverse;
+    }
+    .orbit-dot {
+      position: absolute; width: 14px; height: 14px;
+      background: var(--accent); border-radius: 50%;
+      box-shadow: 0 0 12px var(--accent);
+    }
+    .od1 { top: 0; left: 50%; transform: translate(-50%, -50%); }
+    .od2 { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
+    .od3 { right: 0; top: 50%; transform: translate(50%, -50%); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── LAYANAN (services) ── */
+    #home .services {
+      margin-top: 80px; padding-top: 60px;
+      border-top: 1px solid rgba(10,155,142,0.15);
+    }
+    .section-label {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 0.6rem;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 900; line-height: 1.2; color: var(--charcoal);
+    }
+    .section-sub { color: var(--gray); font-size: 1rem; margin-top: 0.6rem; max-width: 540px; }
+
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem; margin-top: 2.6rem;
+    }
+    .service-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 30px 26px; border: 1px solid rgba(10,155,142,0.1);
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--teal-light));
+      transform: scaleX(0); transform-origin: left; transition: transform .3s;
+    }
+    .service-card:hover { transform: translateY(-5px); box-shadow: 0 16px 44px rgba(10,155,142,0.14); border-color: rgba(10,155,142,0.25); }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      width: 54px; height: 54px; border-radius: 14px;
+      background: var(--sky); display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin-bottom: 1.1rem;
+    }
+    .service-card h3 { font-size: 1.08rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--charcoal); }
+    .service-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.65; }
+
+    .btn-pesan {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #201cd4; color: #ffffff;
+      padding: 11px 22px; border-radius: 50px;
+      font-size: 0.88rem; font-weight: 600; text-decoration: none;
+      margin-top: 1.3rem; transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 14px rgba(37,211,102,0.35);
+    }
+    .btn-pesan:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37,211,102,0.45); }
+    .btn-pesan svg { width: 16px; height: 16px; }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--charcoal);
+      color: var(--white);
+    }
+    #about .section-label { color: var(--teal-light); }
+    #about h2 { color: var(--white); }
+    #about .section-sub { color: rgba(255,255,255,0.6); }
+
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3rem;
+    }
+    .about-text p { font-size: 0.97rem; color: rgba(255,255,255,0.78); line-height: 1.85; margin-bottom: 1.2rem; }
+    .about-text strong { color: var(--teal-light); }
+
+    .fact-list { display: flex; flex-direction: column; gap: 1rem; }
+    .fact-item {
+      background: rgba(255,255,255,0.05); border-left: 3px solid var(--teal);
+      border-radius: 0 10px 10px 0; padding: 18px 22px;
+      transition: background .2s;
+    }
+    .fact-item:hover { background: rgba(10,155,142,0.12); }
+    .fact-item h4 { font-size: 1rem; font-weight: 700; color: var(--teal-light); margin-bottom: 6px; }
+    .fact-item p { font-size: 0.88rem; color: rgba(255,255,255,0.68); line-height: 1.6; }
+
+    /* ── PROFILE ── */
+    #profile { background: var(--light); }
+
+    .profile-card {
+      background: var(--white); border-radius: 24px; padding: 48px;
+      box-shadow: 0 4px 40px rgba(10,155,142,0.08);
+      border: 1px solid rgba(10,155,142,0.1);
+      display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: start;
+    }
+    .profile-badge-box {
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem;
+    }
+    .profile-logo-circle {
+      width: 140px; height: 140px; border-radius: 50%;
+      background: linear-gradient(145deg, var(--teal), var(--teal-dark));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; box-shadow: 0 12px 40px rgba(10,155,142,0.35);
+    }
+    .profile-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 900; color: var(--charcoal);
+    }
+    .profile-year-badge {
+      background: var(--sky); color: var(--teal-dark);
+      border-radius: 50px; padding: 5px 16px;
+      font-size: 0.82rem; font-weight: 700; letter-spacing: 0.5px;
+    }
+
+    .profile-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 900; color: var(--charcoal); margin-bottom: 1rem;
+    }
+    .profile-info p { font-size: 0.96rem; color: var(--gray); line-height: 1.82; margin-bottom: 1rem; }
+
+    .differentiator-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+    .diff-item {
+      background: var(--sky); border-radius: 12px; padding: 16px 18px;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .diff-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 1px; }
+    .diff-item h5 { font-size: 0.9rem; font-weight: 700; color: var(--teal-dark); margin-bottom: 3px; }
+    .diff-item p { font-size: 0.82rem; color: var(--gray); line-height: 1.5; }
+
+    /* ── FOOTER / SOCIAL ── */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255,255,255,0.7);
+      text-align: center; padding: 50px 8vw;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 900; color: var(--blue); margin-bottom: 0.4rem;
+    }
+    .footer-logo span { color: var(--blue); }
+    .footer-tagline { font-size: 0.88rem; margin-bottom: 2rem; color: rgba(255,255,255,0.5); }
+
+    .social-row { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; }
+    .social-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      text-decoration: none; color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.06); border-radius: 14px; padding: 14px 20px;
+      transition: background .2s, color .2s, transform .2s;
+      font-size: 0.78rem; font-weight: 600;
+    }
+    .social-btn svg { width: 22px; height: 22px; }
+    .social-btn:hover { transform: translateY(-3px); color: #fff; }
+    .social-btn.wa:hover { background: #25d366; }
+    .social-btn.ig:hover { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+    .social-btn.tt:hover { background: #000; }
+    .social-btn.fb:hover { background: #1877f2; }
+
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.3); margin-top: 1.5rem; }
+
+    /* ── CTA STRIP ── */
+    .cta-strip {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      padding: 60px 8vw; text-align: center;
+    }
+    .cta-strip h2 { color: #fff; margin-bottom: 0.5rem; }
+    .cta-strip p { color: rgba(255,255,255,0.82); margin-bottom: 1.8rem; font-size: 1rem; }
+    .btn-wa-big {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: #2528d3; color: #fff;
+      padding: 18px 38px; border-radius: 50px;
+      font-size: 1.05rem; font-weight: 700; text-decoration: none;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-wa-big:hover { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(0,0,0,0.32); }
+    .btn-wa-big svg { width: 22px; height: 22px; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .nav-links, .nav-socials { display: none; }
+      .burger { display: flex; }
+      nav.open .nav-links {
+        display: flex; flex-direction: column;
+        position: absolute; top: 68px; left: 0; right: 0;
+        background: var(--white); padding: 20px 5vw;
+        border-bottom: 1px solid rgba(10,155,142,0.12);
+        gap: 1.2rem;
+      }
+      nav.open .nav-socials {
+        display: flex; position: absolute; top: 220px; left: 0; right: 0;
+        justify-content: center; padding: 0 5vw 20px;
+        background: var(--white);
+      }
+      .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-visual { order: -1; }
+      .hero-icon-ring { width: 220px; height: 220px; }
+      .hero-icon-ring-inner { width: 165px; height: 165px; font-size: 5rem; }
+      .hero-stats { flex-wrap: wrap; gap: 1rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .profile-card { grid-template-columns: 1fr; }
+      .differentiator-list { grid-template-columns: 1fr; }
+      section { padding: 80px 5vw 60px; }
+      .social-row { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav id="navbar">
+  <div class="logo">bersih<span>bersih</span></div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#profile">Profile</a></li>
+  </ul>
+  <div class="nav-socials">
+    <!-- WhatsApp -->
+    <a href="https://wa.me/6281234567890" target="_blank" title="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <!-- Instagram -->
+    <a href="https://instagram.com/bersihbersih" target="_blank" title="Instagram">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+    <!-- TikTok -->
+    <a href="https://tiktok.com/@bersihbersih" target="_blank" title="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34l-.01-7.16a8.16 8.16 0 004.77 1.52V6.22a4.85 4.85 0 01-1-.53z"/></svg>
+    </a>
+    <!-- Facebook -->
+    <a href="https://facebook.com/bersihbersih" target="_blank" title="Facebook">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══ HOME ═══ -->
+<section id="home">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+  <div class="hero-bg-circle c3"></div>
+
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">Jasa Kebersihan Terpercaya</div>
+      <h1>Bersih itu <em>Investasi,</em><br>Bukan Sekadar Pilihan</h1>
+      <p class="hero-desc">bersihbersih hadir untuk memberikan solusi kebersihan profesional bagi rumah, kantor, dan komersial Anda. Kami membawa standar baru dalam kebersihan Indonesia.</p>
+      <a href="https://wa.me/6281234567890?text=Halo%20BersihBersih%2C%20saya%20ingin%20memesan%20layanan%20kebersihan" target="_blank" class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Pesan Sekarang
+      </a>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-num">500+</div>
+          <div class="stat-lbl">Pelanggan Puas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">5★</div>
+          <div class="stat-lbl">Rating Layanan</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3 Thn</div>
+          <div class="stat-lbl">Pengalaman</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+  <div class="hero-icon-ring">
+    <div class="orbit-dot od1"></div>
+    <div class="orbit-dot od2"></div>
+    <div class="orbit-dot od3"></div>
+    <div class="hero-icon-ring-inner" style="overflow:hidden;padding:0;">
+      <img src="logo1.jpeg" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;">
+    </div>
+  </div>
+</div>
+  </div>
+
+  <!-- LAYANAN -->
+  <div class="services">
+    <div class="section-label">Layanan Kami</div>
+    <h2>Solusi Kebersihan<br>untuk Semua Kebutuhan</h2>
+    <p class="section-sub">Dari hunian pribadi hingga gedung komersial, tim kami siap memberikan hasil terbaik.</p>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">🏠</div>
+        <h3>Cleaning Rumah & Apartemen</h3>
+        <p>Pembersihan menyeluruh seluruh ruangan termasuk dapur, kamar mandi, dan area tidur dengan produk ramah lingkungan.</p>
+        <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20Cleaning%20Rumah" target="_blank" class="btn-pesan">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Pesan Sekarang
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🏢</div>
+        <h3>Office Cleaning</h3>
+        <p>Menjaga lingkungan kerja tetap bersih, rapi, dan higienis agar produktivitas karyawan meningkat setiap harinya.</p>
+        <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20Office%20Cleaning" target="_blank" class="btn-pesan">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Pesan Sekarang
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">✨</div>
+        <h3>Deep Cleaning</h3>
+        <p>Pembersihan mendalam menjangkau sudut-sudut tersembunyi, noda membandel, dan kotoran yang tidak terjangkau rutinitas biasa.</p>
+        <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20Deep%20Cleaning" target="_blank" class="btn-pesan">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Pesan Sekarang
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🛋️</div>
+        <h3>Cuci Sofa & Karpet</h3>
+        <p>Pencucian profesional sofa dan karpet menggunakan mesin ekstraktor berteknologi tinggi untuk hasil bersih maksimal.</p>
+        <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20Cuci%20Sofa%20dan%20Karpet" target="_blank" class="btn-pesan">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Pesan Sekarang
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🛏️</div>
+        <h3>Cuci Kasur & Interior Mobil</h3>
+        <p>Pencucian profesional Kasur & Interior Mobil menggunakan mesin ekstraktor berteknologi tinggi untuk hasil bersih maksimal.</p>
+        <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20Cuci%20Kaca%20dan%20Fasad" target="_blank" class="btn-pesan">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Pesan Sekarang
+        </a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🏗️</div>
+        <h3>Pasca Renovasi</h3>
+        <p>Pembersihan pasca renovasi yang menyeluruh — dari debu, noda cat, hingga kotoran konstruksi lainnya.</p>
+        <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20After-Renovation%20Cleaning" target="_blank" class="btn-pesan">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Pesan Sekarang
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="section-label">Mengapa Kebersihan Penting?</div>
+  <h2>Lingkungan Bersih,<br>Hidup Lebih Berkualitas</h2>
+  <p class="section-sub">Kebersihan bukan sekadar estetika — ini adalah fondasi kesehatan, produktivitas, dan kesejahteraan hidup Anda.</p>
+
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Kebersihan lingkungan memiliki dampak langsung terhadap <strong>kesehatan fisik dan mental</strong>. Ruangan yang bersih mengurangi paparan kuman, bakteri, dan alergen yang dapat memicu berbagai penyakit seperti asma, alergi, dan infeksi saluran pernapasan.</p>
+      <p>Studi membuktikan bahwa orang yang tinggal atau bekerja di lingkungan bersih memiliki tingkat <strong>stres yang lebih rendah</strong> dan konsentrasi yang lebih baik. Kerapian menciptakan ketenangan pikiran yang mendukung kreativitas dan produktivitas.</p>
+      <p>Dari sisi sosial, lingkungan yang bersih mencerminkan <strong>rasa hormat terhadap diri sendiri dan orang lain</strong>. Rumah dan kantor yang terawat memberikan kesan profesional dan membangun kepercayaan bagi siapa saja yang datang berkunjung.</p>
+      <p>Investasi dalam kebersihan hari ini berarti <strong>menghemat biaya kesehatan</strong> di masa depan. Pencegahan jauh lebih ekonomis daripada pengobatan.</p>
+    </div>
+
+    <div class="fact-list">
+      <div class="fact-item">
+        <h4>🦠 Mencegah Penyakit</h4>
+        <p>Permukaan yang tidak dibersihkan dapat menyimpan ribuan bakteri dan virus yang bertahan hidup hingga beberapa hari dan menjadi sumber penyakit.</p>
+      </div>
+      <div class="fact-item">
+        <h4>🧠 Kesehatan Mental</h4>
+        <p>Lingkungan yang teratur terbukti mengurangi kortisol (hormon stres) dan meningkatkan suasana hati secara signifikan.</p>
+      </div>
+      <div class="fact-item">
+        <h4>⚡ Produktivitas Meningkat</h4>
+        <p>Karyawan di ruang kerja bersih terbukti 15% lebih produktif dan membuat lebih sedikit kesalahan dibanding di ruang kotor.</p>
+      </div>
+      <div class="fact-item">
+        <h4>🌿 Kualitas Udara</h4>
+        <p>Debu dan jamur dalam ruangan dapat memperburuk kualitas udara hingga 5x lebih buruk dari udara luar. Pembersihan rutin adalah solusinya.</p>
+      </div>
+      <div class="fact-item">
+        <h4>💰 Hemat Jangka Panjang</h4>
+        <p>Perawatan rutin memperpanjang umur furnitur, lantai, dan peralatan rumah tangga Anda secara signifikan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROFILE ═══ -->
+<section id="profile">
+  <div class="section-label">Tentang Kami</div>
+  <h2>Mengenal bersihbersih</h2>
+  <p class="section-sub">Lebih dari sekadar layanan kebersihan — kami adalah mitra hidup bersih Anda.</p>
+
+  <div class="profile-card" style="margin-top: 2.5rem;">
+    <div class="profile-badge-box">
+      <div class="profile-logo-circle">
+        <img src="logo1.jpeg" style="width:80px;height:80px;object-fit:cover;border-radius:50%;" />
+      </div>
+      <div class="profile-name">bersihbersih</div>
+      <div class="profile-year-badge">Est. 2022</div>
+    </div>
+
+    <div class="profile-info">
+      <h3>Latar Belakang Perusahaan</h3>
+      <p>
+        bersihbersih didirikan pada tahun <strong>2022</strong> oleh sekelompok profesional yang percaya bahwa setiap orang berhak menikmati lingkungan yang benar-benar bersih tanpa harus repot mengerjakannya sendiri. Berawal dari keresahan akan sulitnya menemukan jasa kebersihan yang <em>benar-benar profesional</em>, terpercaya, dan konsisten di Indonesia — BersihBersih hadir sebagai jawabannya.
+      </p>
+      <p>
+        Dalam waktu singkat, kami telah melayani lebih dari <strong>500 pelanggan</strong> di berbagai kota, mulai dari rumah tangga, apartemen modern, perkantoran korporat, hingga kawasan komersial dan perhotelan. Kepercayaan pelanggan adalah aset terbesar kami.
+      </p>
+      <p>
+        Kami bergerak di bidang <strong>jasa kebersihan profesional</strong> dengan fokus pada kualitas hasil, ketepatan waktu, dan keamanan produk yang digunakan. Setiap staf BersihBersih melewati pelatihan intensif dan bersertifikat sebelum terjun ke lapangan.
+      </p>
+
+      <div class="differentiator-list">
+        <div class="diff-item">
+          <div class="diff-icon">🎓</div>
+          <div>
+            <h5>Tenaga Terlatih & Bersertifikat</h5>
+            <p>Setiap cleaner kami melalui pelatihan intensif dan uji kompetensi resmi.</p>
+          </div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-icon">🌱</div>
+          <div>
+            <h5>Produk Ramah Lingkungan</h5>
+            <p>Kami hanya menggunakan bahan pembersih eco-friendly yang aman untuk keluarga.</p>
+          </div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-icon">🔒</div>
+          <div>
+            <h5>Terjamin & Berasuransi</h5>
+            <p>Layanan kami dilindungi asuransi sehingga Anda bebas dari kekhawatiran.</p>
+          </div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-icon">⏱️</div>
+          <div>
+            <h5>Tepat Waktu, Selalu</h5>
+            <p>Kami menghargai waktu Anda — tidak ada keterlambatan tanpa konfirmasi.</p>
+          </div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-icon">📋</div>
+          <div>
+            <h5>Laporan Transparan</h5>
+            <p>Setiap sesi dilengkapi laporan foto sebelum & sesudah pembersihan.</p>
+          </div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-icon">🔁</div>
+          <div>
+            <h5>Garansi Re-Cleaning</h5>
+            <p>Tidak puas? Kami kembali dan bersihkan ulang tanpa biaya tambahan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA STRIP ═══ -->
+<div class="cta-strip">
+  <h2>Siap Memulai Hidup Lebih Bersih?</h2>
+  <p>Hubungi kami sekarang dan dapatkan konsultasi gratis serta penawaran terbaik untuk kebutuhan kebersihan Anda.</p>
+  <a href="https://wa.me/6282123181255?text=Halo%20BersihBersih%2C%20saya%20ingin%20konsultasi%20layanan%20kebersihan" target="_blank" class="btn-wa-big">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Pesan Sekarang via WhatsApp
+  </a>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-logo">bersih<span>bersih</span></div>
+  <div class="footer-tagline">Jasa Kebersihan Profesional · Est. 2022</div>
+
+  <div class="social-row">
+    <a href="https://wa.me/6282123181255" target="_blank" class="social-btn wa" title="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <a href="https://www.instagram.com/bersihbersih_official?igsh=MWw4dDhvbms2d3hodg==" target="_blank" class="social-btn ig" title="Instagram">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      Instagram
+    </a>
+    <a href="https://tiktok.com/@bersihbersih" target="_blank" class="social-btn tt" title="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34l-.01-7.16a8.16 8.16 0 004.77 1.52V6.22a4.85 4.85 0 01-1-.53z"/></svg>
+      TikTok
+    </a>
+    <a href="https://facebook.com/bersihbersih" target="_blank" class="social-btn fb" title="Facebook">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      Facebook
+    </a>
+  </div>
+
+  <p class="footer-copy">© 2022 bersihbersih. Hak Cipta Dilindungi. | Untuk mengganti nomor WhatsApp, ganti angka 6281234567890 pada semua tautan wa.me di kode.</p>
+</footer>
+
+<script>
+  // Burger menu toggle
+  const burger = document.getElementById('burger');
+  const navbar = document.getElementById('navbar');
+  burger.addEventListener('click', () => {
+    navbar.classList.toggle('open');
+  });
+
+  // Close menu on link click
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => navbar.classList.remove('open'));
+  });
+
+  // Scroll animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .fact-item, .diff-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
